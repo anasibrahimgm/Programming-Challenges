@@ -55,25 +55,41 @@ inputList = [] # input
 twoPkList = [] # array to save status for each 2 pow k values
 kList = [] # array to save status for each k values in every (2 pow k) row
 result = 'NO'
+list1 = []
+list0 = []
 
-for j in range(k + 1):
-    kList.append(0)# initialize elements = FALSE + another column to check the whole number
-    # case k = 3 :
-        # 0 0 1 (1)
-        # 0 1 0 (2)
-        # 0 1 1 (3)
-        # 1 0 0 (4)
-        # ........
+for j in range(k):
+    list1.append('1')
+    list0.append('0')
+    kList.append(0)
 
-    #for every value btn. parentheses we put a boolean value indicating whether it's already found (TRUE) or not (FALSE)
+onesStr = ' '.join(list1)
+zerosStr = ' '.join(list0)
+kList.append(0)# initialize elements = FALSE + another column to check the whole number
+# case k = 3 :
+    # 0 0 1 (1)
+    # 0 1 0 (2)
+    # 0 1 1 (3)
+    # 1 0 0 (4)
+    # ........
+
+#for every value btn. parentheses we put a boolean value indicating whether it's already found (TRUE) or not (FALSE)
 
 for i in range(2**k - 2): # all cases except when all 0's and all 1's
     twoPkList.append(list(kList))#initialize elements = FALSE
 
 for i in range(n):
-    onesList = [] # to save the positions of 1's in the input string
+    inputString = input()
 
-    inputList = input().split()# split the input string
+    if (inputString == zerosStr): # input is all 0's
+        result = "YES"
+        break
+
+    if (inputString == onesStr): # all ones, no need to check
+        continue
+
+    inputList = inputString.split()# split the input string
+    onesList = [] # to save the positions of 1's in the input string
 
     summation = 0 #initialize summation
     for j in range(k):
@@ -83,13 +99,6 @@ for i in range(n):
         if (inputList[j]):# if it is a 1
             onesList.append(j)# keep the position of that 1
             summation += inputList[j] * (2**(k-1-j))
-
-    if (summation == 0): # input is all 0's
-        result = "YES"
-        break
-
-    if (summation == (2**k - 1)): # all ones, no need to check
-        continue
 
     if (twoPkList[2**k - 2 - summation][k]): # if the complement exists
         result = "YES"
