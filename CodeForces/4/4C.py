@@ -10,21 +10,19 @@ The first line contains number n (1 ≤ n ≤ 10^5). The following n lin
 Output
 Print n lines, which are system responses to the requests: OK in case of successful registration, or a prompt with a new name, if the requested name is already taken.
 """
-database = []
+n = int(input())
+s = set()
+l = {}
 
-count = int(input())
-dict1 = {}
-
-while count:
-    name = input()
-
-    if name in database:
-        print(name + str(dict1[name] + 1))
-        dict1[name] += 1
-
-    else:
-        dict1[name] = 0
-        database.append(name)
+while(n):
+    x = input()
+    if x not in s:
         print("OK")
+        l[x] = 0
+    else:
+        l[x] = l.get(x) + 1
+        print(x + str(l.get(x)))
 
-    count -= 1
+    s.add(x)
+
+    n -= 1
