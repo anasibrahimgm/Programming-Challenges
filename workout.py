@@ -1,5 +1,4 @@
-def double_digits(y):
-	return '0' + str(y) if y < 10 else y
+double_digits = lambda y: ('0' + str(y)) if y < 10 else y
 
 def time_format(seconds):
 	minutes = int(seconds/60)
