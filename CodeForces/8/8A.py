@@ -38,28 +38,12 @@ else:
 	forward = False
 	backward = False
 
-	x_find_seq1 = x.find(seq1)
-	if x_find_seq1 > -1:
-		x_find_seq2 = x[x_find_seq1 + len(seq1):].find(seq2) # start searching after seq1 ends in the colors string
-		if x_find_seq2 > -1:
-			x_find_seq2 += x_find_seq1 + len(seq1) # add the margin
-	else:
-		x_find_seq2 = -1
-
-	x_reversed_find_seq1 = x_reversed.find(seq1)
-	if x_reversed_find_seq1 > -1:
-		x_reversed_find_seq2 = x_reversed[x_reversed_find_seq1 + len(seq1):].find(seq2)
-		if x_reversed_find_seq2 > -1:
-			x_reversed_find_seq2 += x_reversed_find_seq1 + len(seq1)
-	else:
-		x_reversed_find_seq2 = -1
-
-	if (x_find_seq1 != -1 and x_find_seq1 != -1):
-		if x_find_seq1 <= x_find_seq2:
+	if seq1 in x:
+		if seq2 in x[x.find(seq1) + len(seq1):] :
 			forward = True
 
-	if (x_reversed_find_seq1 != -1 and x_reversed_find_seq1 != -1):
-		if x_reversed_find_seq1 <= x_reversed_find_seq2:
+	if seq1 in x_reversed:
+		if seq2 in x_reversed[x_reversed.find(seq1) + len(seq1):] :
 			backward = True
 
 	if forward and backward:
