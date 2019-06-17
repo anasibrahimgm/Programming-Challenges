@@ -9,23 +9,23 @@ Output the answer to the problem.
 """
 
 n, P1, P2, P3, T1, T2 = list(map(int, input().split()))
+P2 -= P1
+P3 -= P1 + P2
 
 e = 0 # e for energy
 time_periods = []
 
-for i in range(n):
+time_periods += list(map(int, input().split()))
+
+for i in range(n - 1):
     li, ri = list(map(int, input().split()))
-    time_periods += [li, ri]
-
-e += (time_periods[-1] - time_periods[0]) * P1
-P2 -= P1
-P3 -= P1 + P2
-
-for j in range(1, (2*n - 1), 2):
-    y = time_periods[j + 1] - time_periods[j]
+    y = li - time_periods[2*i + 1]
     if y > T1:
         e += (y - T1) * P2
         if (y - T1) > T2:
             e+= (y - T1 - T2) * P3
 
+    time_periods += [li, ri]
+
+e += (time_periods[-1] - time_periods[0]) * P1
 print(e)
