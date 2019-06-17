@@ -16,21 +16,16 @@ time_periods = []
 for i in range(n):
     li, ri = list(map(int, input().split()))
     time_periods += [li, ri]
-    e += (ri - li) * P1
 
-# take out both first and last element
-# time_periods.pop(0)
-# time_periods.pop(-1)
+e += (time_periods[-1] - time_periods[0]) * P1
+P2 -= P1
+P3 -= P1 + P2
 
 for j in range(1, (2*n - 1), 2):
     y = time_periods[j + 1] - time_periods[j]
     if y > T1:
-        e += T1 * P1
+        e += (y - T1) * P2
         if (y - T1) > T2:
-            e+= T2 * P2 + (y - T1 - T2) * P3
-        else:
-            e += (y - T1) * P2
-    else:
-        e += y * P1
+            e+= (y - T1 - T2) * P3
 
 print(e)
